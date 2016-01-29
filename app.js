@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
 });
 // [END hello_world]
 
-// app.use("/mail", mail)
+app.use("/mail", mail)
 
 
 // [START server]
