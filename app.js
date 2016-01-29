@@ -16,6 +16,7 @@
 var express = require('express');
 
 var app = express();
+var mail = require('./mail/mail');
 
 var APP_PORT = process.env.OPENSHIFT_NODEJS_PORT || 8080
 var APP_IP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1"
@@ -26,6 +27,8 @@ app.get('/', function(req, res) {
   res.status(200).send('Hello, world! My first deployment  - IP IS : ' + server.address().address );
 });
 // [END hello_world]
+
+app.use("/mail", mail)
 
 
 // [START server]
