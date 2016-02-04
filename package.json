@@ -9,11 +9,11 @@
     "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+    "name": "TeenySheep.com",
+    "email": "tufjef@gmail.com",
+    "url": "http://www.teenysheep.com/"
   },
-  "homepage": "http://www.openshift.com/",
+  "homepage": "http://www.teenysheep.com/",
   "repository": {
     "type": "git",
     "url": "https://github.com/openshift/origin-server"
@@ -25,7 +25,8 @@
   },
 
   "dependencies": {
-    "express": "~4.0"
+    "express": "~4.0",
+    "mailgun-js": "0.7.7"
   },
   "devDependencies": {},
   "bundleDependencies": [],

@@ -24,11 +24,11 @@ var APP_IP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1"
 // [START hello_world]
 // Say hello!
 app.get('/', function(req, res) {
-  res.status(200).send('Hello, world! My first deployment  - IP IS : ' + server.address().address );
+  res.status(200).send('Hello, world! My first deployment' );
 });
 // [END hello_world]
 
-app.use("/mail", mail)
+app.use("/mail", mail) 
 
 
 // [START server]
