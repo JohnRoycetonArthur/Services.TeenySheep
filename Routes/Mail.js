@@ -27,7 +27,7 @@ router.post('/', function(req, res) {
 	// get data from request
 	status = appRegistry.CheckifKeyExist("testapp-123")
 	// use mailer component to send mail
-	if status {
+	if (status) {
 		
 		var data = {
   			from: 'Excited User <mark.arthur@digiflare.com>',
