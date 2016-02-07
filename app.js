@@ -16,7 +16,7 @@
 var express = require('express');
 
 var app = express();
-var mail = require('./Mail/mail');
+var mail = require('./Routes/Mail');
 
 var APP_PORT = process.env.OPENSHIFT_NODEJS_PORT || 8080
 var APP_IP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1"
