@@ -22,7 +22,7 @@ AppRegistry.CheckifKeyExist = function(key) {
 		if (Registry.hasOwnProperty(appId)) {
 
 			if (Registry[appId].key == key) {
-				status = true
+				status = true 
 				return status
 			}
   		}
