@@ -2,8 +2,11 @@
 /* Implementation of mail api  -  we use mailgun here */
 
 // Constants and imports
-var api_key = 'key-2bfec95b08f94a91816e9425596a2f2a';
-var domain = 'mg.teenysheep.com';
+// Mailgun-apikey in environment var : process.env.MAILGUN_APIKEY
+// Mailgun-api domain : process.env.MAILGUN_DOMAIN
+
+var api_key = process.env.MAILGUN_APIKEY;
+var domain = process.env.MAILGUN_DOMAIN;
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 var Mailer = { }
