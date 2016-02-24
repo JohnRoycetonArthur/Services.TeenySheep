@@ -54,14 +54,7 @@ router.post('/', function(req, res) {
 				res.json({ Code: 200, Status: 'Sorry ! The to and / or from parameters are not valid' })
 			}
 		}
-
-		if (req.body.subject === undefined) {
-			res.json({ Code: 200, Status: 'Sorry ! The subject or text or html parameters need to be specified' })
-		}
-
 	}
-
-	// Step 2 : Check if Subject and / or text or html is present
 
 
 	contentType = req.get('content-type')
