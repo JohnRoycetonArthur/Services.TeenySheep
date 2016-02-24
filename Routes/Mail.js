@@ -45,6 +45,23 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
 	
 	// TODO : Do data validations to check if the sent data is sanitized !
+	if (req.body !== undefined) {
+
+		// Step 1 : Check if to and from addresses are present
+		if (req.body.from !== undefined && req.body.to !== undefined){
+			var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+			if (!emailRegex.test(req.body.from) && !emailRegex.test(req.body.to)){
+				res.json({ Code: 200, Status: 'Sorry ! The to and / or from parameters are not valid' })
+			}
+		}
+
+		if (req.body.subject == undefined && ((req.body.text == undefined) || (req.body.html == undefined)) {
+			res.json({ Code: 200, Status: 'Sorry ! The subject or text or html parameters need to be specified' })
+		}
+
+	}
+
+	// Step 2 : Check if Subject and / or text or html is present
 
 
 	contentType = req.get('content-type')
@@ -57,7 +74,8 @@ router.post('/', function(req, res) {
 			from: req.body.from,
 			to: req.body.to,
 			subject: req.body.subject,
-			text: req.body.text
+			text: req.body.text,
+			html: req.body.html
 		}
 
 		mailer.send(data)
