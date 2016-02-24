@@ -55,7 +55,7 @@ router.post('/', function(req, res) {
 			}
 		}
 
-		if (req.body.subject == undefined && ((req.body.text == undefined) || (req.body.html == undefined)) {
+		if (req.body.subject === undefined) {
 			res.json({ Code: 200, Status: 'Sorry ! The subject or text or html parameters need to be specified' })
 		}
 
