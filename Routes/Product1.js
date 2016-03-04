@@ -48,7 +48,7 @@ router.use(function(req, res, next){
 
 // Sample route to see if mailer is function or not
 router.get('/', function(req, res) {
-  res.json({ Code: 200, Status: 'Product1 Api is up and running' });
+  res.json({ Code: 200, Status: 'Product1 Api is up and running', URL: dbURL });
 });
 
 
