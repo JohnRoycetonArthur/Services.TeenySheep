@@ -18,7 +18,7 @@ TeamPredictorDataService = { }
 
 TeamPredictorDataService.GetSquad = function(req, res){
 
-    var squad = db.get('Squad')
+    var squad = req.db.get('Squad')
     res.json({ Code: 200, Status: 'Data from GetSquad', data: squad });
 
 }
