@@ -14,7 +14,12 @@ var dbPort = process.env.OPENSHIFT_MONGODB_DB_PORT;
 var dbName = "fusionyouth"
 var dbURL = "mongodb://"+dbHost+":"+dbPort+"/"+dbName
 
-// var db = require('monk')(dbURL)
+var connection_string = "mongodb://"+ process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' + dbName;
+
+var db = require('monk')(connection_string)
 
 // Parse requests with application/json
 router.use(bodyParser.json())
@@ -23,6 +28,8 @@ router.use(bodyParser.urlencoded({ extended: true }))
 
 // Middleware - does /mail routes data validation
 router.use(function(req, res, next){
+
+	req.db = db
 
 	// validate request to see if the app is registered
 	appKey = req.get('x-app-key')
@@ -45,7 +52,7 @@ router.use(function(req, res, next){
 
 // Sample route to see if mailer is function or not
 router.get('/', function(req, res) {
-  res.json({ Code: 200, Status: 'Product1 Api is up and running', URL: dbURL });
+  res.json({ Code: 200, Status: 'Product1 Api is up and running', URL: dbURL , con: connection_string});
 });
 
 
@@ -54,9 +61,9 @@ router.get('/', function(req, res) {
 /* Returns the current squad information from DB */
 router.get('/GetSquad', function(req, res) {
 
-	//squad = req.db.get('Squad')
-	//res.json({ Code: 200, Status: 'Data from GetSquad', data: squad });
-	dataServices.GetSquad(req, res)
+	squad = req.db.get('Squad')
+	res.json({ Code: 200, Status: 'Data from GetSquad', data: squad });
+	//dataServices.GetSquad(req, res)
 
 });
 
