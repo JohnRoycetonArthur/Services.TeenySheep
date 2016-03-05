@@ -14,7 +14,7 @@ var dbPort = process.env.OPENSHIFT_MONGODB_DB_PORT;
 var dbName = "fusionyouth"
 var dbURL = "mongodb://"+dbHost+":"+dbPort+"/"+dbName
 
-var db = require('monk')(dbURL)
+// var db = require('monk')(dbURL)
 
 // Parse requests with application/json
 router.use(bodyParser.json())
@@ -23,9 +23,6 @@ router.use(bodyParser.urlencoded({ extended: true }))
 
 // Middleware - does /mail routes data validation
 router.use(function(req, res, next){
-
-	// Add the DB 
-	req.db = db
 
 	// validate request to see if the app is registered
 	appKey = req.get('x-app-key')
