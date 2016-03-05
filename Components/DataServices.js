@@ -10,13 +10,24 @@ var dbPort = process.env.OPENSHIFT_MONGODB_DB_PORT;
 var dbName = "fusionyouth"
 var dbURL = "mongodb://"+dbHost+":"+dbPort+"/"+dbName
 
+// Retrieve
+var MongoClient = require('mongodb').MongoClient;
 
 TeamPredictorDataService = { }
+
+// Connect to the db
+MongoClient.connect(dbURL, function(err, db) {
+  if(!err) {
+    console.log("We are connected");
+    TeamPredictorDataService.db = db
+  }
+});
 
 TeamPredictorDataService.GetSquad = function(req, res){
 
     // var squad = req.db.get('Squad')
-    res.json({ Code: 200, Status: 'Data from GetSquad' });
+    var collection = TeamPredictorDataService.db.collection('Squad');
+    res.json({ Code: 200, Status: 'Data from GetSquad', data: collection });
 
 }
 
