@@ -29,8 +29,6 @@ router.use(bodyParser.urlencoded({ extended: true }))
 // Middleware - does /mail routes data validation
 router.use(function(req, res, next){
 
-	req.db = db
-
 	// validate request to see if the app is registered
 	appKey = req.get('x-app-key')
 
@@ -52,7 +50,7 @@ router.use(function(req, res, next){
 
 // Sample route to see if mailer is function or not
 router.get('/', function(req, res) {
-  res.json({ Code: 200, Status: 'Product1 Api is up and running', URL: dbURL , con: connection_string});
+  res.json({ Code: 200, Status: 'Product1 Api is up and running', URL: dbURL , con: connection_string, data: db});
 });
 
 
@@ -61,9 +59,9 @@ router.get('/', function(req, res) {
 /* Returns the current squad information from DB */
 router.get('/GetSquad', function(req, res) {
 
-	//squad = req.db.get('Squad')
-	//res.json({ Code: 200, Status: 'Data from GetSquad', data: squad });
-	dataServices.GetSquad(req, res)
+	squad = db.get('Squad')
+	res.json({ Code: 200, Status: 'Data from GetSquad', data: squad });
+	// dataServices.GetSquad(req, res)
 
 });
 
