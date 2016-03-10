@@ -28,6 +28,7 @@ MongoClient.connect(connection_string, function(err, db) {
     TeamPredictorDataService.db = db
   } else{
      console.log("error ! in db connection")
+     TeamPredictorDataService.error = err
   }
 
 });
@@ -35,8 +36,8 @@ MongoClient.connect(connection_string, function(err, db) {
 TeamPredictorDataService.GetSquad = function(req, res){
 
     // var squad = req.db.get('Squad')
-    var collection = TeamPredictorDataService.db.collection('Squad');
-    res.json({ Code: 200, Status: 'Data from GetSquad', data: collection });
+    // var collection = TeamPredictorDataService.db.collection('Squad');
+    res.json({ Code: 200, Status: 'Data from GetSquad', data: TeamPredictorDataService });
 
 }
 
