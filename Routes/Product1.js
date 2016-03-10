@@ -12,14 +12,14 @@ var dataServices = require('../Components/DataServices')
 var dbHost = process.env.OPENSHIFT_MONGODB_DB_HOST;
 var dbPort = process.env.OPENSHIFT_MONGODB_DB_PORT;
 var dbName = "fusionyouth"
-var dbURL = "mongodb://"+dbHost+":"+dbPort+"/"+dbName
+var dbURL = dbHost+":"+dbPort+"/"+dbName
 
-var connection_string =  process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+var connection_string = "mongodb://"+ process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
   process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
   process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' + dbName;
 
-var db = require('monk')(connection_string)
+var db = require('monk')(dbURL)
 
 // Parse requests with application/json
 router.use(bodyParser.json())
