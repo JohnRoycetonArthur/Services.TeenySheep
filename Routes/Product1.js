@@ -63,7 +63,7 @@ router.get('/', function(req, res) {
 router.get('/GetSquad', function(req, res) {
 
 	// squad = req.db.get('Squad')
-	res.json({ Code: 200, Status: 'Data from GetSquad', data: squad });
+	res.json({ Code: 200, Status: 'Data from GetSquad', data: "s" });
 	// dataServices.GetSquad(req, res)
 
 });
