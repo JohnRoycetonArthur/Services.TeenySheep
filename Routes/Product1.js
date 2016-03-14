@@ -21,7 +21,7 @@ var connection_string = "mongodb://"+ process.env.OPENSHIFT_MONGODB_DB_USERNAME 
   process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' + dbName;
 
-var db = require('monk')(mLabDB)
+var db = require('monk')(connection_string)
 
 // Parse requests with application/json
 router.use(bodyParser.json())
