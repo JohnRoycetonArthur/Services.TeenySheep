@@ -62,8 +62,11 @@ router.get('/', function(req, res) {
 /* Returns the current squad information from DB */
 router.get('/GetSquad', function(req, res) {
 
-	// squad = req.db.get('Squad')
-	res.json({ Code: 200, Status: 'Data from GetSquad', data: "s" });
+	squad = req.db.get('Squad')
+	squad.find({ }, function (err, docs){
+		res.json({ Code: 200, Status: 'Data from GetSquad', data: "s" , docs: docs});
+	});
+	// res.json({ Code: 200, Status: 'Data from GetSquad', data: "s" });
 	// dataServices.GetSquad(req, res)
 
 });
