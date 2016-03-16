@@ -10,11 +10,7 @@ TeamPredictorDataService.GetSquad = function(req, res){
 
     squad = req.db.get('Squad')
     squad.find({ }, function (err, docs){
-      if err {
-        res.json({ Code: 200, Status: 'error'})
-      } else {
         res.json({ Code: 200, Status: 'Success', data: docs});
-      }
     });
 
 }
@@ -24,11 +20,7 @@ TeamPredictorDataService.GetSchedule = function(req, res){
 
     schedule = req.db.get('Schedule')
     schedule.find({ }, function (err, docs){
-      if err {
-        res.json({ Code: 200, Status: 'error'})
-      } else {
         res.json({ Code: 200, Status: 'Success', data: docs});
-      }
     });
 
 }
@@ -38,11 +30,7 @@ TeamPredictorDataService.GetFormations = function(req, res){
 	 
     formations = req.db.get('Formations')
     formations.find({ }, function (err, docs){
-      if err {
-        res.json({ Code: 200, Status: 'error'})
-      } else {
         res.json({ Code: 200, Status: 'Success', data: docs});
-      }
     });
 
 }
