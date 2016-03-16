@@ -9,18 +9,13 @@ var appRegistry = require('../Components/AppRegistry')
 var reqHelpers = require('../Utils/RequestUtils')
 var dataServices = require('../Components/DataServices')
 
+var userName = process.env.OPENSHIFT_MONGODB_DB_USERNAME
+var password = process.env.OPENSHIFT_MONGODB_DB_PASSWORD
 var dbHost = process.env.OPENSHIFT_MONGODB_DB_HOST;
 var dbPort = process.env.OPENSHIFT_MONGODB_DB_PORT;
 var dbName = "fusionyouth"
-var dbURL = dbHost+":"+dbPort+"/"+dbName
 
-var mLabDB = "mongodb://p1Client:teenysheep123@ds023088.mlab.com:23088/teenysheep"
-
-var connection_string = "mongodb://"+ process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' + dbName;
-
+var connection_string = "mongodb://"+ userName + ":" + password + "@" + dbHost + ':' + dbPort + '/' + dbName;
 var db = require('monk')(connection_string)
 
 // Parse requests with application/json
@@ -53,7 +48,7 @@ router.use(function(req, res, next){
 
 // Sample route to see if mailer is function or not
 router.get('/', function(req, res) {
-  res.json({ Code: 200, Status: 'Product1 Api is up and running', URL: dbURL , con: connection_string});
+  res.json({ Code: 200, Status: 'Product1 Api is up and running', con: connection_string});
 });
 
 
@@ -62,12 +57,7 @@ router.get('/', function(req, res) {
 /* Returns the current squad information from DB */
 router.get('/GetSquad', function(req, res) {
 
-	squad = req.db.get('Squad')
-	squad.find({ }, function (err, docs){
-		res.json({ Code: 200, Status: 'Data from GetSquad', data: "s" , docs: docs});
-	});
-	// res.json({ Code: 200, Status: 'Data from GetSquad', data: "s" });
-	// dataServices.GetSquad(req, res)
+	dataServices.GetSquad(req, res)
 
 });
 
@@ -76,7 +66,7 @@ router.get('/GetSquad', function(req, res) {
 /* Returns the current schedule information from DB */
 router.get('/GetSchedule', function(req, res) {
 
-	res.json({ Code: 200, Status: 'Data from GetSchedule' });
+	dataServices.GetSchedule(req, res)
 
 });
 
@@ -85,7 +75,7 @@ router.get('/GetSchedule', function(req, res) {
 /* Returns the formations information from DB */
 router.get('/GetFormations', function(req, res) {
 
-	res.json({ Code: 200, Status: 'Data from GetFormations' });
+	dataServices.GetFormations(req, res)
 
 });
 

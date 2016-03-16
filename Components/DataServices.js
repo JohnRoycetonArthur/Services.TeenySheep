@@ -2,52 +2,49 @@
 /* Implementation for getting data for TeamPredictor  -  we use mongodb here */
 
 // Constants and imports
-// Mailgun-apikey in environment var : process.env.MAILGUN_APIKEY
-// Mailgun-api domain : process.env.MAILGUN_DOMAIN
-
-var dbHost = process.env.OPENSHIFT_MONGODB_DB_HOST || "";
-var dbPort = process.env.OPENSHIFT_MONGODB_DB_PORT || "";
-var dbName = "fusionyouth"
-var dbURL = "mongodb://"+dbHost+":"+dbPort+"/"+dbName
-
-var connection_string = "mongodb://"+ process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-  process.env.OPENSHIFT_APP_NAME;
-
-// Retrieve
-var MongoClient = require('mongodb').MongoClient;
 
 TeamPredictorDataService = { }
 
-// Connect to the db
-MongoClient.connect(connection_string, function(err, db) {
-  if(!err) {
-    console.log("We are connected");
-    TeamPredictorDataService.db = db
-  } else{
-     console.log("error ! in db connection")
-     TeamPredictorDataService.error = err
-  }
-
-});
-
+/* Returns Squad Api info */
 TeamPredictorDataService.GetSquad = function(req, res){
 
-    // var squad = req.db.get('Squad')
-    // var collection = TeamPredictorDataService.db.collection('Squad');
-    res.json({ Code: 200, Status: 'Data from GetSquad', data: "" });
+    squad = req.db.get('Squad')
+    squad.find({ }, function (err, docs){
+      if err {
+        res.json({ Code: 200, Status: 'error'})
+      } else {
+        res.json({ Code: 200, Status: 'Success', data: docs});
+      }
+    });
 
 }
 
-TeamPredictorDataService.GetSchedule = function(){
-	
+// return Schedule data api
+TeamPredictorDataService.GetSchedule = function(req, res){
+
+    schedule = req.db.get('Schedule')
+    schedule.find({ }, function (err, docs){
+      if err {
+        res.json({ Code: 200, Status: 'error'})
+      } else {
+        res.json({ Code: 200, Status: 'Success', data: docs});
+      }
+    });
+
 }
 
-TeamPredictorDataService.GetFormations = function(){
-	
-}
+// return formations data api
+TeamPredictorDataService.GetFormations = function(req, res){
+	 
+    formations = req.db.get('Formations')
+    formations.find({ }, function (err, docs){
+      if err {
+        res.json({ Code: 200, Status: 'error'})
+      } else {
+        res.json({ Code: 200, Status: 'Success', data: docs});
+      }
+    });
 
+}
 
 module.exports = TeamPredictorDataService;
